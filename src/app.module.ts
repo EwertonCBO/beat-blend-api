@@ -1,10 +1,25 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { UserModule } from './app/user/user.module';
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: process.env.TYPEORM_CONNECTION as any,
+      host: process.env.TYPEORM_HOST,
+      port: parseInt(process.env.TYPEORM_PORT, 10),
+      username: process.env.TYPEORM_USERNAME,
+      password: process.env.TYPEORM_PASSWORD,
+      database: process.env.TYPEORM_DATABASE,
+      migrations: [__dirname + '/migrations/*{.ts,.js}'],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    } as TypeOrmModuleOptions),
+    UserModule,
+  ],
+  controllers: [],
+  providers: [],
+  exports: [],
 })
 export class AppModule {}
