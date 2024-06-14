@@ -1,22 +1,10 @@
 import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { hashSync } from 'bcryptjs';
 
-@Entity({schema: 'public', name: 'user'})
-export class UserEntity{
+@Entity({schema: 'public', name: 'music'})
+export class MusicEntity{
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  nome: string;
-
-  @Column()
-  email: string;
-
-  @Column({ name: 'type' })
-  type: string;
-
-  @Column()
-  password: string;
 
   @CreateDateColumn({ name: 'created_at' })
   created_at: Date;
@@ -29,8 +17,4 @@ export class UserEntity{
 
   @BeforeInsert()
   @BeforeUpdate()
-  hashPassword(){
-      this.password = hashSync(this.password, 10);
-    }
-
 }
