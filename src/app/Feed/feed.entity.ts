@@ -15,7 +15,6 @@ export class FeedEntity{
   @DeleteDateColumn({ name: 'deleted_at' })
   deleted_at: Date;
 
-  //@BeforeInsert(){}
-
-  //@BeforeUpdate(){}
+  @BeforeInsert()
+  @BeforeUpdate()
 }
