@@ -1,5 +1,6 @@
 import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { hashSync } from 'bcryptjs';
+import { GenreUserEntity } from "src/app/genre/entities/genre.user.entity";
 
 @Entity({schema: 'public', name: 'user'})
 export class UserEntity{
@@ -20,6 +21,9 @@ export class UserEntity{
 
   @Column()
   password: string;
+
+  @OneToMany(() => GenreUserEntity, genre => genre.genresUser)
+  genresUser: GenreUserEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   created_at: Date;
