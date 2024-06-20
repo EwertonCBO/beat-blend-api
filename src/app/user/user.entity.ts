@@ -7,13 +7,16 @@ export class UserEntity{
   id: number;
 
   @Column()
-  nome: string;
+  name: string;
 
+  @Column({nullable:true})
+  nickname: string;
+
+  @Column({nullable:true})
+  avatar: string;
+  
   @Column()
   email: string;
-
-  @Column({ name: 'type' })
-  type: string;
 
   @Column()
   password: string;
